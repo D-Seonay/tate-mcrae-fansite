@@ -1,0 +1,63 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ------------------------------------------------------------------ */
+/*  Thème « old money méditerranéen »                                  */
+/*  Change ces variables pour ajuster toute l'identité du site.        */
+/* ------------------------------------------------------------------ */
+:root {
+  --color-cream: #f4ece0; /* fond principal, chaud et clair */
+  --color-sand: #e7dac6; /* surfaces, cartes */
+  --color-stone: #cdbfa8; /* bordures douces */
+  --color-ink: #2a2420; /* texte principal, brun profond */
+  --color-muted: #6f6355; /* texte secondaire */
+  --color-signal: #c62828; /* ROUGE signature (maillot / landau) */
+  --color-signal-dark: #9c1f1f;
+  --color-olive: #4f5b3c; /* verts méditerranéens */
+  --color-sky: #a9bcc4; /* bleu ciel délavé */
+
+  --font-display: "Playfair Display", Georgia, serif;
+  --font-sans: "Inter", system-ui, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-cream);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Grain argentique subtil, appliqué en overlay global (voir Grain.tsx). */
+.grain-overlay {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  opacity: 0.05;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Petit utilitaire pour le filet rouge sous les titres de section. */
+.rule-signal::after {
+  content: "";
+  display: block;
+  width: 3rem;
+  height: 2px;
+  margin-top: 0.75rem;
+  background-color: var(--color-signal);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .animate-fade-up {
+    animation: none !important;
+  }
+}
