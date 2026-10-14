@@ -2,19 +2,22 @@
 
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
+import { useTranslations } from "next-intl";
 import { Link, usePathname } from "@/i18n/navigation";
 import { site } from "@/data/site";
 
 const links = [
-  { href: "/", label: "Accueil" },
-  { href: "/news", label: "Actu" },
-  { href: "/discography", label: "Discographie" },
-  { href: "/about", label: "À propos" },
+  { href: "/", key: "home" },
+  { href: "/news", key: "news" },
+  { href: "/discography", key: "discography" },
+  { href: "/about", key: "about" },
 ] as const;
 
 export default function Nav() {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
+  const t = useTranslations("nav");
+  const tSite = useTranslations("site");
 
   // Ferme le menu à chaque changement de page.
   useEffect(() => {
@@ -35,11 +38,11 @@ export default function Nav() {
         <Link
           href="/"
           className="font-display text-xl tracking-tight text-ink"
-          aria-label={`${site.artist} — accueil`}
+          aria-label={`${site.artist} — ${t("home")}`}
         >
           {site.artist}
           <span className="ml-2 align-middle text-[0.6rem] uppercase tracking-[0.2em] text-signal">
-            fan
+            {t("fan")}
           </span>
         </Link>
 
@@ -56,7 +59,7 @@ export default function Nav() {
                     active ? "text-ink" : "text-muted"
                   }`}
                 >
-                  {l.label}
+                  {t(l.key)}
                   {active && (
                     <motion.span
                       layoutId="nav-underline"
@@ -73,11 +76,11 @@ export default function Nav() {
         <button
           type="button"
           onClick={() => setOpen((v) => !v)}
-          aria-label={open ? "Fermer le menu" : "Ouvrir le menu"}
+          aria-label={open ? t("close") : t("open")}
           aria-expanded={open}
           className="relative z-50 flex h-10 w-10 items-center justify-center md:hidden"
         >
-          <span className="sr-only">Menu</span>
+          <span className="sr-only">{t("menu")}</span>
           <div className="flex w-6 flex-col items-end gap-1.5">
             <motion.span
               animate={open ? { rotate: 45, y: 6, width: "100%" } : { rotate: 0, y: 0, width: "100%" }}
@@ -118,13 +121,13 @@ export default function Nav() {
                     href={l.href}
                     className="block py-5 font-display text-4xl text-ink"
                   >
-                    {l.label}
+                    {t(l.key)}
                   </Link>
                 </motion.li>
               ))}
             </ul>
             <p className="mt-auto px-6 pb-10 text-xs text-muted">
-              {site.tagline}
+              {tSite("tagline")}
             </p>
           </motion.div>
         )}

@@ -1,11 +1,13 @@
 "use client";
 
 import { motion, useReducedMotion } from "motion/react";
+import { useTranslations } from "next-intl";
 import SpotifyEmbed from "./SpotifyEmbed";
 import type { Release } from "@/data/discography";
 
 export default function AlbumCard({ release }: { release: Release }) {
   const reduce = useReducedMotion();
+  const t = useTranslations("albumCard");
 
   return (
     <motion.article
@@ -35,7 +37,7 @@ export default function AlbumCard({ release }: { release: Release }) {
         )}
         {release.current && (
           <span className="absolute left-3 top-3 rounded-full bg-signal px-3 py-1 text-xs font-medium uppercase tracking-wider text-cream shadow-sm">
-            Nouvelle ère
+            {t("currentBadge")}
           </span>
         )}
       </div>

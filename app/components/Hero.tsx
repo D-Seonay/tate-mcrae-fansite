@@ -2,8 +2,8 @@
 
 import { useRef } from "react";
 import { motion, useReducedMotion, useScroll, useTransform } from "motion/react";
+import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
-import { site } from "@/data/site";
 import { formatDateFr } from "@/data/format";
 import type { Show } from "@/data/shows";
 
@@ -15,6 +15,8 @@ import type { Show } from "@/data/shows";
  */
 export default function Hero({ nextShow }: { nextShow?: Show }) {
   const reduce = useReducedMotion();
+  const t = useTranslations("hero");
+  const tSite = useTranslations("site");
   const ref = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -64,7 +66,7 @@ export default function Hero({ nextShow }: { nextShow?: Show }) {
           transition={{ duration: 0.6, ease }}
           className="overline text-signal"
         >
-          {site.tagline}
+          {tSite("tagline")}
         </motion.p>
 
         {/* Titre révélé en remontant derrière un masque (clip éditorial). */}
@@ -93,8 +95,7 @@ export default function Hero({ nextShow }: { nextShow?: Show }) {
           transition={{ duration: 0.7, ease, delay: 0.5 }}
           className="mt-7 max-w-xl text-base leading-relaxed text-muted md:text-lg"
         >
-          Actualité, dates de concert, discographie et clips — tout l&apos;univers
-          de sa nouvelle ère, réuni au même endroit.
+          {t("intro")}
         </motion.p>
 
         <motion.div
@@ -107,13 +108,13 @@ export default function Hero({ nextShow }: { nextShow?: Show }) {
             href="/discography"
             className="rounded-full bg-signal px-6 py-3 text-sm font-medium text-cream transition-transform duration-200 hover:bg-signal-dark active:scale-95"
           >
-            Écouter la discographie
+            {t("listen")}
           </Link>
           <Link
             href="/news"
             className="rounded-full border border-ink/25 px-6 py-3 text-sm font-medium text-ink transition-colors duration-200 hover:border-ink hover:bg-ink/5"
           >
-            Voir l&apos;actu
+            {t("seeNews")}
           </Link>
         </motion.div>
 
@@ -124,7 +125,7 @@ export default function Hero({ nextShow }: { nextShow?: Show }) {
             transition={{ duration: 0.7, ease, delay: 0.78 }}
             className="mt-14 inline-flex flex-col gap-1 border-l-2 border-signal pl-4"
           >
-            <span className="overline text-muted">Prochain concert</span>
+            <span className="overline text-muted">{t("nextShow")}</span>
             <span className="font-display text-lg text-ink">
               {nextShow.city} — {formatDateFr(nextShow.date)}
             </span>

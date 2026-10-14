@@ -1,15 +1,19 @@
+import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { site } from "@/data/site";
 
-const socials: { label: string; href: string }[] = [
-  { label: "Spotify", href: site.links.spotify },
-  { label: "YouTube", href: site.links.youtube },
-  { label: "Instagram", href: site.links.instagram },
-  { label: "TikTok", href: site.links.tiktok },
-  { label: "Site officiel", href: site.links.official },
-];
-
 export default function Footer() {
+  const t = useTranslations("footer");
+  const tSite = useTranslations("site");
+
+  const socials: { label: string; href: string }[] = [
+    { label: "Spotify", href: site.links.spotify },
+    { label: "YouTube", href: site.links.youtube },
+    { label: "Instagram", href: site.links.instagram },
+    { label: "TikTok", href: site.links.tiktok },
+    { label: t("officialSite"), href: site.links.official },
+  ];
+
   return (
     <footer className="mt-24 border-t border-stone/60 bg-sand/50">
       {/* Bandeau défilant — nom de l'artiste à la façon d'une marquee éditoriale. */}
@@ -36,11 +40,11 @@ export default function Footer() {
           <div className="max-w-sm">
             <p className="font-display text-lg text-ink">{site.artist}</p>
             <p className="mt-2 text-sm leading-relaxed text-muted">
-              {site.description}
+              {tSite("description")}
             </p>
           </div>
-          <nav aria-label="Liens officiels">
-            <p className="overline mb-3 text-muted">Officiel</p>
+          <nav aria-label={t("linksLabel")}>
+            <p className="overline mb-3 text-muted">{t("official")}</p>
             <ul className="space-y-2 text-sm">
               {socials.map((s) => (
                 <li key={s.label}>
@@ -60,17 +64,11 @@ export default function Footer() {
 
         {/* Mention légale — indispensable pour un site de fan. */}
         <div className="mt-10 border-t border-stone/60 pt-6 text-xs leading-relaxed text-muted">
-          <p>
-            Site de fan <strong>non officiel</strong>, sans lien avec Tate McRae,
-            son management ou son label. Aucun contenu audio ou visuel officiel
-            n&apos;est hébergé ici : les écoutes passent par les lecteurs
-            officiels (Spotify, Apple Music, YouTube). Marques, visuels et
-            musiques appartiennent à leurs ayants droit.
-          </p>
+          <p>{t("legal")}</p>
           <p className="mt-3">
-            © {new Date().getFullYear()} — projet de fan.{" "}
+            {t("copyright", { year: new Date().getFullYear() })}{" "}
             <Link href="/about" className="underline hover:text-ink">
-              En savoir plus
+              {t("learnMore")}
             </Link>
             .
           </p>

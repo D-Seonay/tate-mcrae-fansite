@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { setRequestLocale } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import Reveal from "@/app/components/Reveal";
 import SectionHeading from "@/app/components/SectionHeading";
 import { news } from "@/data/news";
@@ -18,6 +18,7 @@ export default async function NewsPage({
 }) {
   const { locale } = await params;
   setRequestLocale(locale);
+  const t = await getTranslations("newsPage");
 
   const sortedNews = [...news].sort((a, b) => b.date.localeCompare(a.date));
   const shows = upcomingShows();
@@ -25,17 +26,17 @@ export default async function NewsPage({
   return (
     <div className="mx-auto max-w-content px-5 py-20 md:px-8 md:py-28">
       <Reveal>
-        <SectionHeading overline="Actu & agenda" title="Quoi de neuf" />
+        <SectionHeading overline={t("overline")} title={t("title")} />
       </Reveal>
 
       <div className="mt-14 grid gap-12 lg:grid-cols-[1.4fr_1fr]">
         {/* Fil d'actualité */}
         <section>
-          <h3 className="mb-6 font-display text-2xl text-ink">Actualité</h3>
+          <h3 className="mb-6 font-display text-2xl text-ink">
+            {t("newsHeading")}
+          </h3>
           {sortedNews.length === 0 ? (
-            <p className="text-sm text-muted">
-              Rien à signaler pour l&apos;instant.
-            </p>
+            <p className="text-sm text-muted">{t("noNews")}</p>
           ) : (
             <ul className="space-y-8">
               {sortedNews.map((n, i) => (
@@ -63,7 +64,7 @@ export default async function NewsPage({
                       rel="noopener noreferrer"
                       className="mt-2 inline-block text-sm font-medium text-signal underline-offset-4 hover:underline"
                     >
-                      En savoir plus →
+                      {t("readMore")}
                     </a>
                   )}
                 </Reveal>
@@ -75,12 +76,10 @@ export default async function NewsPage({
         {/* Agenda */}
         <section>
           <h3 className="mb-6 font-display text-2xl text-ink">
-            Prochaines dates
+            {t("datesHeading")}
           </h3>
           {shows.length === 0 ? (
-            <p className="text-sm text-muted">
-              Aucune date annoncée pour le moment.
-            </p>
+            <p className="text-sm text-muted">{t("noDates")}</p>
           ) : (
             <ul className="space-y-4">
               {shows.map((s, i) => (
@@ -103,7 +102,7 @@ export default async function NewsPage({
                       rel="noopener noreferrer"
                       className="mt-2 inline-block text-sm font-medium text-signal underline-offset-4 hover:underline"
                     >
-                      Billets →
+                      {t("tickets")}
                     </a>
                   )}
                 </Reveal>

@@ -1,1 +1,83 @@
-{}
+{
+  "site": {
+    "tagline": "Site de fan non officiel",
+    "description": "Hub de fan non officiel dédié à Tate McRae : actualité, dates de concert, discographie et clips, au même endroit."
+  },
+  "nav": {
+    "fan": "fan",
+    "home": "Accueil",
+    "news": "Actu",
+    "discography": "Discographie",
+    "about": "À propos",
+    "menu": "Menu",
+    "open": "Ouvrir le menu",
+    "close": "Fermer le menu"
+  },
+  "hero": {
+    "intro": "Actualité, dates de concert, discographie et clips — tout l'univers de sa nouvelle ère, réuni au même endroit.",
+    "listen": "Écouter la discographie",
+    "seeNews": "Voir l'actu",
+    "nextShow": "Prochain concert"
+  },
+  "home": {
+    "listenOverline": "À écouter",
+    "newEra": "La nouvelle ère",
+    "fullDiscography": "Toute la discographie →",
+    "tourOverline": "En concert",
+    "upcoming": "Prochaines dates",
+    "tickets": "Billets",
+    "soon": "Bientôt",
+    "fullAgenda": "Agenda complet →",
+    "albumsOverline": "Albums & EP",
+    "discography": "Discographie",
+    "seeAllDiscography": "Voir toute la discographie →",
+    "latestOverline": "Dernières infos",
+    "news": "Actu",
+    "allNews": "Toute l'actu →"
+  },
+  "discographyPage": {
+    "overline": "Albums & EP",
+    "title": "Discographie",
+    "intro": "Chaque sortie est accompagnée du lecteur Spotify officiel. Clique sur un titre pour écouter directement — rien n'est hébergé ici, tout passe par les plateformes officielles."
+  },
+  "newsPage": {
+    "overline": "Actu & agenda",
+    "title": "Quoi de neuf",
+    "newsHeading": "Actualité",
+    "noNews": "Rien à signaler pour l'instant.",
+    "datesHeading": "Prochaines dates",
+    "noDates": "Aucune date annoncée pour le moment.",
+    "readMore": "En savoir plus →",
+    "tickets": "Billets →"
+  },
+  "about": {
+    "overline": "À propos",
+    "title": "Un site de fan",
+    "intro": "Ce site est un projet de fan dédié à {artist} : un endroit soigné pour suivre son actualité, retrouver sa discographie et ses clips, et ne rien manquer de sa nouvelle ère.",
+    "notOfficialTitle": "Ce site n'est pas officiel.",
+    "notOfficialBody": "Il n'a aucun lien avec {artist}, son management ou son label. Aucun fichier audio ou visuel officiel n'y est hébergé : les écoutes passent par les lecteurs officiels (Spotify, Apple Music, YouTube). Les paroles, pochettes, photos et marques appartiennent à leurs ayants droit respectifs.",
+    "takedownTitle": "Une demande de retrait ?",
+    "takedownBody": "Si tu es ayant droit et souhaites qu'un contenu soit modifié ou retiré, contacte-nous et nous donnerons suite rapidement. (Ajoute ici une adresse de contact.)",
+    "creditsTitle": "Crédits",
+    "creditsBody": "Conçu et développé par un fan. Design et intégration : {placeholder}. Musique et visuels officiels : © {artist} et ses ayants droit.",
+    "creditsPlaceholder": "à compléter"
+  },
+  "footer": {
+    "official": "Officiel",
+    "officialSite": "Site officiel",
+    "linksLabel": "Liens officiels",
+    "notOfficial": "non officiel",
+    "legal": "Site de fan non officiel, sans lien avec Tate McRae, son management ou son label. Aucun contenu audio ou visuel officiel n'est hébergé ici : les écoutes passent par les lecteurs officiels (Spotify, Apple Music, YouTube). Marques, visuels et musiques appartiennent à leurs ayants droit.",
+    "copyright": "© {year} — projet de fan.",
+    "learnMore": "En savoir plus"
+  },
+  "albumCard": {
+    "currentBadge": "Nouvelle ère"
+  },
+  "spotify": {
+    "label": "Lecteur Spotify",
+    "placeholder": "Colle l'ID Spotify {title} dans le fichier de données pour afficher le lecteur ici.",
+    "placeholderTitle": "de « {title} »",
+    "listenOn": "Écouter sur Spotify →"
+  }
+}

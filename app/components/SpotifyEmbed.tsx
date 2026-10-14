@@ -1,3 +1,4 @@
+import { useTranslations } from "next-intl";
 import { site } from "@/data/site";
 
 type Props = {
@@ -14,6 +15,7 @@ type Props = {
  * collé les vrais IDs.
  */
 export default function SpotifyEmbed({ albumId, trackId, title }: Props) {
+  const t = useTranslations("spotify");
   const kind = trackId ? "track" : albumId ? "album" : null;
   const id = trackId || albumId;
 
@@ -21,11 +23,12 @@ export default function SpotifyEmbed({ albumId, trackId, title }: Props) {
     return (
       <div className="flex flex-col items-start gap-2 rounded-lg border border-dashed border-stone bg-sand/40 p-5 text-sm text-muted">
         <span className="text-xs uppercase tracking-[0.2em] text-signal">
-          Lecteur Spotify
+          {t("label")}
         </span>
         <p>
-          Colle l&apos;ID Spotify {title ? `de « ${title} »` : ""} dans le
-          fichier de données pour afficher le lecteur ici.
+          {t("placeholder", {
+            title: title ? t("placeholderTitle", { title }) : "",
+          })}
         </p>
         <a
           href={site.links.spotify}
@@ -33,7 +36,7 @@ export default function SpotifyEmbed({ albumId, trackId, title }: Props) {
           rel="noopener noreferrer"
           className="font-medium text-ink underline hover:text-signal"
         >
-          Écouter sur Spotify →
+          {t("listenOn")}
         </a>
       </div>
     );
@@ -41,7 +44,7 @@ export default function SpotifyEmbed({ albumId, trackId, title }: Props) {
 
   return (
     <iframe
-      title={title ? `Lecteur Spotify — ${title}` : "Lecteur Spotify"}
+      title={title ? `${t("label")} — ${title}` : t("label")}
       src={`https://open.spotify.com/embed/${kind}/${id}?utm_source=generator`}
       width="100%"
       height={kind === "track" ? 152 : 352}

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { setRequestLocale } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import Reveal from "@/app/components/Reveal";
 import SectionHeading from "@/app/components/SectionHeading";
 import AlbumCard from "@/app/components/AlbumCard";
@@ -17,17 +17,16 @@ export default async function DiscographyPage({
 }) {
   const { locale } = await params;
   setRequestLocale(locale);
+  const t = await getTranslations("discographyPage");
 
   return (
     <div className="mx-auto max-w-content px-5 py-20 md:px-8 md:py-28">
       <Reveal>
-        <SectionHeading overline="Albums & EP" title="Discographie" />
+        <SectionHeading overline={t("overline")} title={t("title")} />
       </Reveal>
       <Reveal delay={0.05}>
         <p className="mt-6 max-w-2xl text-sm leading-relaxed text-muted">
-          Chaque sortie est accompagnée du lecteur Spotify officiel. Clique sur
-          un titre pour écouter directement — rien n&apos;est hébergé ici, tout
-          passe par les plateformes officielles.
+          {t("intro")}
         </p>
       </Reveal>
 

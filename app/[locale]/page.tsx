@@ -1,4 +1,4 @@
-import { setRequestLocale } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import Hero from "@/app/components/Hero";
 import Reveal from "@/app/components/Reveal";
@@ -17,6 +17,7 @@ export default async function Home({
 }) {
   const { locale } = await params;
   setRequestLocale(locale);
+  const t = await getTranslations("home");
 
   const shows = upcomingShows();
   const nextShow = shows[0];
@@ -32,7 +33,10 @@ export default async function Home({
       {/* Dernier single / nouvelle ère */}
       <section className="mx-auto max-w-content px-5 py-20 md:px-8 md:py-28">
         <Reveal>
-          <SectionHeading overline="À écouter" title="La nouvelle ère" />
+          <SectionHeading
+            overline={t("listenOverline")}
+            title={t("newEra")}
+          />
         </Reveal>
         <div className="mt-10 grid items-start gap-8 md:grid-cols-[1fr_1.2fr]">
           <Reveal delay={0.05} className="space-y-4">
@@ -48,7 +52,7 @@ export default async function Home({
               href="/discography"
               className="inline-block text-sm font-medium text-signal underline-offset-4 hover:underline"
             >
-              Toute la discographie →
+              {t("fullDiscography")}
             </Link>
           </Reveal>
           <Reveal delay={0.12}>
@@ -62,7 +66,10 @@ export default async function Home({
         <section className="border-y border-stone/60 bg-sand/40">
           <div className="mx-auto max-w-content px-5 py-20 md:px-8 md:py-28">
             <Reveal>
-              <SectionHeading overline="En concert" title="Prochaines dates" />
+              <SectionHeading
+                overline={t("tourOverline")}
+                title={t("upcoming")}
+              />
             </Reveal>
             <ul className="mt-10 divide-y divide-stone/60">
               {shows.map((s, i) => (
@@ -89,10 +96,10 @@ export default async function Home({
                         rel="noopener noreferrer"
                         className="rounded-full border border-ink/20 px-4 py-2 text-sm text-ink transition-colors hover:border-signal hover:text-signal"
                       >
-                        Billets
+                        {t("tickets")}
                       </a>
                     ) : (
-                      <span className="overline text-muted">Bientôt</span>
+                      <span className="overline text-muted">{t("soon")}</span>
                     )}
                   </div>
                 </Reveal>
@@ -102,7 +109,7 @@ export default async function Home({
               href="/news"
               className="mt-8 inline-block text-sm font-medium text-signal underline-offset-4 hover:underline"
             >
-              Agenda complet →
+              {t("fullAgenda")}
             </Link>
           </div>
         </section>
@@ -111,7 +118,10 @@ export default async function Home({
       {/* Discographie — aperçu */}
       <section className="mx-auto max-w-content px-5 py-20 md:px-8 md:py-28">
         <Reveal>
-          <SectionHeading overline="Albums & EP" title="Discographie" />
+          <SectionHeading
+            overline={t("albumsOverline")}
+            title={t("discography")}
+          />
         </Reveal>
         <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {releases.slice(0, 3).map((r, i) => (
@@ -124,7 +134,7 @@ export default async function Home({
           href="/discography"
           className="mt-10 inline-block text-sm font-medium text-signal underline-offset-4 hover:underline"
         >
-          Voir toute la discographie →
+          {t("seeAllDiscography")}
         </Link>
       </section>
 
@@ -133,7 +143,10 @@ export default async function Home({
         <section className="border-t border-stone/60 bg-sand/40">
           <div className="mx-auto max-w-content px-5 py-20 md:px-8 md:py-28">
             <Reveal>
-              <SectionHeading overline="Dernières infos" title="Actu" />
+              <SectionHeading
+                overline={t("latestOverline")}
+                title={t("news")}
+              />
             </Reveal>
             <ul className="mt-10 space-y-6">
               {latestNews.map((n, i) => (
@@ -156,7 +169,7 @@ export default async function Home({
               href="/news"
               className="mt-8 inline-block text-sm font-medium text-signal underline-offset-4 hover:underline"
             >
-              Toute l&apos;actu →
+              {t("allNews")}
             </Link>
           </div>
         </section>

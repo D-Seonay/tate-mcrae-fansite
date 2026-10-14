@@ -1,1 +1,83 @@
-{}
+{
+  "site": {
+    "tagline": "Unofficial fan site",
+    "description": "Unofficial fan hub for Tate McRae: news, tour dates, discography and videos, all in one place."
+  },
+  "nav": {
+    "fan": "fan",
+    "home": "Home",
+    "news": "News",
+    "discography": "Discography",
+    "about": "About",
+    "menu": "Menu",
+    "open": "Open menu",
+    "close": "Close menu"
+  },
+  "hero": {
+    "intro": "News, tour dates, discography and videos — her whole new era, gathered in one place.",
+    "listen": "Listen to the discography",
+    "seeNews": "See the news",
+    "nextShow": "Next show"
+  },
+  "home": {
+    "listenOverline": "Listen",
+    "newEra": "The new era",
+    "fullDiscography": "Full discography →",
+    "tourOverline": "On tour",
+    "upcoming": "Upcoming dates",
+    "tickets": "Tickets",
+    "soon": "Soon",
+    "fullAgenda": "Full agenda →",
+    "albumsOverline": "Albums & EPs",
+    "discography": "Discography",
+    "seeAllDiscography": "See the full discography →",
+    "latestOverline": "Latest",
+    "news": "News",
+    "allNews": "All the news →"
+  },
+  "discographyPage": {
+    "overline": "Albums & EPs",
+    "title": "Discography",
+    "intro": "Each release comes with the official Spotify player. Tap a title to listen directly — nothing is hosted here, everything goes through the official platforms."
+  },
+  "newsPage": {
+    "overline": "News & agenda",
+    "title": "What's new",
+    "newsHeading": "News",
+    "noNews": "Nothing to report yet.",
+    "datesHeading": "Upcoming dates",
+    "noDates": "No dates announced yet.",
+    "readMore": "Read more →",
+    "tickets": "Tickets →"
+  },
+  "about": {
+    "overline": "About",
+    "title": "A fan site",
+    "intro": "This site is a fan project dedicated to {artist}: a thoughtful place to follow her news, find her discography and videos, and never miss anything from her new era.",
+    "notOfficialTitle": "This site is not official.",
+    "notOfficialBody": "It has no connection with {artist}, her management or her label. No official audio or visual file is hosted here: listening goes through the official players (Spotify, Apple Music, YouTube). Lyrics, covers, photos and trademarks belong to their respective rights holders.",
+    "takedownTitle": "A takedown request?",
+    "takedownBody": "If you are a rights holder and would like content to be changed or removed, contact us and we will act promptly. (Add a contact address here.)",
+    "creditsTitle": "Credits",
+    "creditsBody": "Designed and built by a fan. Design and integration: {placeholder}. Official music and visuals: © {artist} and its rights holders.",
+    "creditsPlaceholder": "to be completed"
+  },
+  "footer": {
+    "official": "Official",
+    "officialSite": "Official site",
+    "linksLabel": "Official links",
+    "notOfficial": "unofficial",
+    "legal": "Unofficial fan site, with no connection to Tate McRae, her management or her label. No official audio or visual content is hosted here: listening goes through the official players (Spotify, Apple Music, YouTube). Trademarks, visuals and music belong to their rights holders.",
+    "copyright": "© {year} — fan project.",
+    "learnMore": "Learn more"
+  },
+  "albumCard": {
+    "currentBadge": "New era"
+  },
+  "spotify": {
+    "label": "Spotify player",
+    "placeholder": "Paste the Spotify ID {title} into the data file to show the player here.",
+    "placeholderTitle": "of “{title}”",
+    "listenOn": "Listen on Spotify →"
+  }
+}
