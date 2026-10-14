@@ -8,16 +8,19 @@ import AlbumCard from "@/app/components/AlbumCard";
 import { releases } from "@/data/discography";
 import { upcomingShows } from "@/data/shows";
 import { news } from "@/data/news";
-import { formatDateFr } from "@/data/format";
+import { formatDate, localize } from "@/data/format";
+import type { Locale } from "@/i18n/routing";
 
 export default async function Home({
   params,
 }: {
   params: Promise<{ locale: string }>;
 }) {
-  const { locale } = await params;
-  setRequestLocale(locale);
+  const { locale: localeParam } = await params;
+  setRequestLocale(localeParam);
+  const locale = localeParam as Locale;
   const t = await getTranslations("home");
+  const tTags = await getTranslations("tags");
 
   const shows = upcomingShows();
   const nextShow = shows[0];
@@ -41,11 +44,11 @@ export default async function Home({
         <div className="mt-10 grid items-start gap-8 md:grid-cols-[1fr_1.2fr]">
           <Reveal delay={0.05} className="space-y-4">
             <p className="font-display text-2xl italic text-ink">
-              {current.title}
+              {localize(current.title, locale)}
             </p>
             {current.note && (
               <p className="text-sm leading-relaxed text-muted">
-                {current.note}
+                {localize(current.note, locale)}
               </p>
             )}
             <Link
@@ -56,7 +59,10 @@ export default async function Home({
             </Link>
           </Reveal>
           <Reveal delay={0.12}>
-            <SpotifyEmbed albumId={current.spotifyId} title={current.title} />
+            <SpotifyEmbed
+              albumId={current.spotifyId}
+              title={localize(current.title, locale)}
+            />
           </Reveal>
         </div>
       </section>
@@ -75,19 +81,21 @@ export default async function Home({
               {shows.map((s, i) => (
                 <Reveal
                   as="li"
-                  key={`${s.date}-${s.city}`}
+                  key={s.date}
                   delay={i * 0.06}
                   y={18}
                 >
                   <div className="flex flex-wrap items-center justify-between gap-3 py-5">
                     <div>
                       <p className="font-display text-xl text-ink">
-                        {s.city}
+                        {localize(s.city, locale)}
                         <span className="ml-2 align-middle text-sm font-sans text-muted">
-                          {s.venue}, {s.country}
+                          {s.venue}, {localize(s.country, locale)}
                         </span>
                       </p>
-                      <p className="text-sm text-muted">{formatDateFr(s.date)}</p>
+                      <p className="text-sm text-muted">
+                        {formatDate(s.date, locale)}
+                      </p>
                     </div>
                     {s.ticketUrl ? (
                       <a
@@ -158,10 +166,12 @@ export default async function Home({
                   className="border-l-2 border-stone pl-4"
                 >
                   <p className="overline text-muted">
-                    {formatDateFr(n.date)}
-                    {n.tag ? ` · ${n.tag}` : ""}
+                    {formatDate(n.date, locale)}
+                    {n.tag ? ` · ${tTags(n.tag)}` : ""}
                   </p>
-                  <p className="mt-1 font-display text-lg text-ink">{n.title}</p>
+                  <p className="mt-1 font-display text-lg text-ink">
+                    {localize(n.title, locale)}
+                  </p>
                 </Reveal>
               ))}
             </ul>

@@ -74,6 +74,12 @@
   "albumCard": {
     "currentBadge": "New era"
   },
+  "tags": {
+    "release": "Release",
+    "tour": "Tour",
+    "media": "Media",
+    "announcement": "Announcement"
+  },
   "spotify": {
     "label": "Spotify player",
     "placeholder": "Paste the Spotify ID {title} into the data file to show the player here.",

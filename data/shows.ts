@@ -1,15 +1,19 @@
+import type { Localized } from "./format";
+
 /**
  * Dates de concert. ENTRÉES D'EXEMPLE à remplacer par les vraies dates (ou à
  * alimenter depuis une source comme le site officiel / un billetteur).
  *
  * `date` au format "YYYY-MM-DD". Les dates passées sont filtrées automatiquement
  * côté affichage (voir la page Actu et le Hero).
+ * `city` / `country` : bilingues { en, fr } (ex. Londres / London).
+ * `venue` : nom propre, non traduit.
  */
 export type Show = {
   date: string;
-  city: string;
+  city: Localized;
   venue: string;
-  country: string;
+  country: Localized;
   ticketUrl?: string;
 };
 
@@ -18,21 +22,21 @@ export const shows: Show[] = [
     date: "2026-11-12",
     city: "Paris",
     venue: "Accor Arena",
-    country: "France",
+    country: { fr: "France", en: "France" },
     ticketUrl: "",
   },
   {
     date: "2026-11-15",
-    city: "Londres",
+    city: { fr: "Londres", en: "London" },
     venue: "The O2",
-    country: "Royaume-Uni",
+    country: { fr: "Royaume-Uni", en: "United Kingdom" },
     ticketUrl: "",
   },
   {
     date: "2026-11-20",
-    city: "Berlin",
+    city: { fr: "Berlin", en: "Berlin" },
     venue: "Uber Arena",
-    country: "Allemagne",
+    country: { fr: "Allemagne", en: "Germany" },
     ticketUrl: "",
   },
 ];

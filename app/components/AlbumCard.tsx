@@ -1,13 +1,18 @@
 "use client";
 
 import { motion, useReducedMotion } from "motion/react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import SpotifyEmbed from "./SpotifyEmbed";
 import type { Release } from "@/data/discography";
+import { localize } from "@/data/format";
+import type { Locale } from "@/i18n/routing";
 
 export default function AlbumCard({ release }: { release: Release }) {
   const reduce = useReducedMotion();
   const t = useTranslations("albumCard");
+  const locale = useLocale() as Locale;
+  const title = localize(release.title, locale);
+  const note = release.note ? localize(release.note, locale) : undefined;
 
   return (
     <motion.article
@@ -22,7 +27,7 @@ export default function AlbumCard({ release }: { release: Release }) {
           // eslint-disable-next-line @next/next/no-img-element
           <img
             src={release.cover}
-            alt={`Visuel — ${release.title}`}
+            alt={`Visuel — ${title}`}
             className="h-full w-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-105"
           />
         ) : (
@@ -31,7 +36,7 @@ export default function AlbumCard({ release }: { release: Release }) {
             aria-hidden="true"
           >
             <span className="font-display text-2xl italic text-ink/70">
-              {release.title}
+              {title}
             </span>
           </div>
         )}
@@ -44,15 +49,15 @@ export default function AlbumCard({ release }: { release: Release }) {
 
       <div className="space-y-3 p-5">
         <div className="flex items-baseline justify-between gap-3">
-          <h3 className="font-display text-xl text-ink">{release.title}</h3>
+          <h3 className="font-display text-xl text-ink">{title}</h3>
           <span className="whitespace-nowrap text-xs uppercase tracking-wider text-muted">
             {release.type} · {release.year}
           </span>
         </div>
-        {release.note && (
-          <p className="text-sm leading-relaxed text-muted">{release.note}</p>
+        {note && (
+          <p className="text-sm leading-relaxed text-muted">{note}</p>
         )}
-        <SpotifyEmbed albumId={release.spotifyId} title={release.title} />
+        <SpotifyEmbed albumId={release.spotifyId} title={title} />
       </div>
     </motion.article>
   );

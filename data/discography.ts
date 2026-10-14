@@ -1,3 +1,5 @@
+import type { Localized } from "./format";
+
 /**
  * Discographie. Les dates/années sont à vérifier avant mise en ligne.
  *
@@ -7,16 +9,18 @@
  *   Laisse vide ("") tant que tu n'as pas collé le vrai ID : le lecteur
  *   affichera un placeholder propre au lieu d'un embed cassé.
  *
+ * `title` : nom propre (chaîne) ou bilingue { en, fr } si descriptif.
+ * `note` : contenu bilingue { en, fr }.
  * `cover` : chemin vers TON visuel (dans /public). N'héberge pas la pochette
  *   officielle — utilise un visuel libre de droits, le tien, ou laisse vide
  *   (un dégradé est affiché à la place).
  */
 export type Release = {
   slug: string;
-  title: string;
+  title: Localized;
   type: "Album" | "EP" | "Single";
   year: number;
-  note?: string;
+  note?: Localized;
   spotifyId?: string;
   cover?: string;
   current?: boolean;
@@ -25,11 +29,13 @@ export type Release = {
 export const releases: Release[] = [
   {
     slug: "nouvelle-ere",
-    title: "Nouvelle ère (2026)",
+    title: { fr: "Nouvelle ère (2026)", en: "New era (2026)" },
     type: "Single",
     year: 2026,
-    note:
-      "Virage old-money méditerranéen, argentique et chaud. Détails à compléter dès l'officialisation.",
+    note: {
+      fr: "Virage old-money méditerranéen, argentique et chaud. Détails à compléter dès l'officialisation.",
+      en: "A warm, old-money Mediterranean turn, shot on film. Details to come once it's official.",
+    },
     spotifyId: "",
     current: true,
   },
@@ -38,7 +44,10 @@ export const releases: Release[] = [
     title: "So Close to What",
     type: "Album",
     year: 2025,
-    note: "Troisième album studio. Une édition deluxe est également sortie.",
+    note: {
+      fr: "Troisième album studio. Une édition deluxe est également sortie.",
+      en: "Third studio album. A deluxe edition was also released.",
+    },
     spotifyId: "",
   },
   {
@@ -46,7 +55,10 @@ export const releases: Release[] = [
     title: "Think Later",
     type: "Album",
     year: 2023,
-    note: "Deuxième album studio, porté par le succès de « Greedy ».",
+    note: {
+      fr: "Deuxième album studio, porté par le succès de « Greedy ».",
+      en: "Second studio album, carried by the success of “Greedy”.",
+    },
     spotifyId: "",
   },
   {
@@ -54,7 +66,7 @@ export const releases: Release[] = [
     title: "I Used to Think I Could Fly",
     type: "Album",
     year: 2022,
-    note: "Premier album studio.",
+    note: { fr: "Premier album studio.", en: "Debut studio album." },
     spotifyId: "",
   },
   {
@@ -62,7 +74,10 @@ export const releases: Release[] = [
     title: "Too Young to Be Sad",
     type: "EP",
     year: 2021,
-    note: "EP incluant « You Broke Me First ».",
+    note: {
+      fr: "EP incluant « You Broke Me First ».",
+      en: "EP including “You Broke Me First”.",
+    },
     spotifyId: "",
   },
   {
@@ -70,7 +85,7 @@ export const releases: Release[] = [
     title: "All the Things I Never Said",
     type: "EP",
     year: 2020,
-    note: "EP de débuts.",
+    note: { fr: "EP de débuts.", en: "Debut EP." },
     spotifyId: "",
   },
 ];

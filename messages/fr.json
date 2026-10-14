@@ -74,6 +74,12 @@
   "albumCard": {
     "currentBadge": "Nouvelle ère"
   },
+  "tags": {
+    "release": "Sortie",
+    "tour": "Tournée",
+    "media": "Média",
+    "announcement": "Annonce"
+  },
   "spotify": {
     "label": "Lecteur Spotify",
     "placeholder": "Colle l'ID Spotify {title} dans le fichier de données pour afficher le lecteur ici.",

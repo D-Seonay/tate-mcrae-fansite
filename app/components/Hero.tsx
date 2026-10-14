@@ -2,10 +2,11 @@
 
 import { useRef } from "react";
 import { motion, useReducedMotion, useScroll, useTransform } from "motion/react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
-import { formatDateFr } from "@/data/format";
+import { formatDate, localize } from "@/data/format";
 import type { Show } from "@/data/shows";
+import type { Locale } from "@/i18n/routing";
 
 /**
  * Hero plein écran, direction « Riviera argentique ». Lumière chaude, halo
@@ -17,6 +18,7 @@ export default function Hero({ nextShow }: { nextShow?: Show }) {
   const reduce = useReducedMotion();
   const t = useTranslations("hero");
   const tSite = useTranslations("site");
+  const locale = useLocale() as Locale;
   const ref = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -127,10 +129,11 @@ export default function Hero({ nextShow }: { nextShow?: Show }) {
           >
             <span className="overline text-muted">{t("nextShow")}</span>
             <span className="font-display text-lg text-ink">
-              {nextShow.city} — {formatDateFr(nextShow.date)}
+              {localize(nextShow.city, locale)} —{" "}
+              {formatDate(nextShow.date, locale)}
             </span>
             <span className="text-sm text-muted">
-              {nextShow.venue}, {nextShow.country}
+              {nextShow.venue}, {localize(nextShow.country, locale)}
             </span>
           </motion.div>
         )}

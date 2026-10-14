@@ -4,7 +4,8 @@ import Reveal from "@/app/components/Reveal";
 import SectionHeading from "@/app/components/SectionHeading";
 import { news } from "@/data/news";
 import { upcomingShows } from "@/data/shows";
-import { formatDateFr } from "@/data/format";
+import { formatDate, localize } from "@/data/format";
+import type { Locale } from "@/i18n/routing";
 
 export const metadata: Metadata = {
   title: "Actu & agenda",
@@ -16,9 +17,11 @@ export default async function NewsPage({
 }: {
   params: Promise<{ locale: string }>;
 }) {
-  const { locale } = await params;
-  setRequestLocale(locale);
+  const { locale: localeParam } = await params;
+  setRequestLocale(localeParam);
+  const locale = localeParam as Locale;
   const t = await getTranslations("newsPage");
+  const tTags = await getTranslations("tags");
 
   const sortedNews = [...news].sort((a, b) => b.date.localeCompare(a.date));
   const shows = upcomingShows();
@@ -42,20 +45,20 @@ export default async function NewsPage({
               {sortedNews.map((n, i) => (
                 <Reveal
                   as="li"
-                  key={n.date + n.title}
+                  key={n.date + localize(n.title, locale)}
                   delay={i * 0.06}
                   y={18}
                   className="border-l-2 border-signal pl-5"
                 >
                   <p className="overline text-muted">
-                    {formatDateFr(n.date)}
-                    {n.tag ? ` · ${n.tag}` : ""}
+                    {formatDate(n.date, locale)}
+                    {n.tag ? ` · ${tTags(n.tag)}` : ""}
                   </p>
                   <h4 className="mt-1 font-display text-xl text-ink">
-                    {n.title}
+                    {localize(n.title, locale)}
                   </h4>
                   <p className="mt-2 text-sm leading-relaxed text-muted">
-                    {n.body}
+                    {localize(n.body, locale)}
                   </p>
                   {n.link && (
                     <a
@@ -85,16 +88,20 @@ export default async function NewsPage({
               {shows.map((s, i) => (
                 <Reveal
                   as="li"
-                  key={`${s.date}-${s.city}`}
+                  key={s.date}
                   delay={i * 0.06}
                   y={16}
                   className="rounded-2xl border border-stone/60 bg-sand/40 p-4 transition-colors hover:border-signal/50"
                 >
-                  <p className="font-display text-lg text-ink">{s.city}</p>
-                  <p className="text-sm text-muted">
-                    {s.venue}, {s.country}
+                  <p className="font-display text-lg text-ink">
+                    {localize(s.city, locale)}
                   </p>
-                  <p className="mt-1 text-sm text-ink">{formatDateFr(s.date)}</p>
+                  <p className="text-sm text-muted">
+                    {s.venue}, {localize(s.country, locale)}
+                  </p>
+                  <p className="mt-1 text-sm text-ink">
+                    {formatDate(s.date, locale)}
+                  </p>
                   {s.ticketUrl && (
                     <a
                       href={s.ticketUrl}
