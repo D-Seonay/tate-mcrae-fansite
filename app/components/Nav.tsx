@@ -1,17 +1,16 @@
 "use client";
 
-import Link from "next/link";
-import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
+import { Link, usePathname } from "@/i18n/navigation";
 import { site } from "@/data/site";
 
 const links = [
   { href: "/", label: "Accueil" },
-  { href: "/actu", label: "Actu" },
-  { href: "/discographie", label: "Discographie" },
-  { href: "/a-propos", label: "À propos" },
-];
+  { href: "/news", label: "Actu" },
+  { href: "/discography", label: "Discographie" },
+  { href: "/about", label: "À propos" },
+] as const;
 
 export default function Nav() {
   const [open, setOpen] = useState(false);

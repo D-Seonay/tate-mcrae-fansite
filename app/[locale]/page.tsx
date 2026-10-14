@@ -1,15 +1,23 @@
-import Link from "next/link";
-import Hero from "./components/Hero";
-import Reveal from "./components/Reveal";
-import SectionHeading from "./components/SectionHeading";
-import SpotifyEmbed from "./components/SpotifyEmbed";
-import AlbumCard from "./components/AlbumCard";
+import { setRequestLocale } from "next-intl/server";
+import { Link } from "@/i18n/navigation";
+import Hero from "@/app/components/Hero";
+import Reveal from "@/app/components/Reveal";
+import SectionHeading from "@/app/components/SectionHeading";
+import SpotifyEmbed from "@/app/components/SpotifyEmbed";
+import AlbumCard from "@/app/components/AlbumCard";
 import { releases } from "@/data/discography";
 import { upcomingShows } from "@/data/shows";
 import { news } from "@/data/news";
 import { formatDateFr } from "@/data/format";
 
-export default function Home() {
+export default async function Home({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  setRequestLocale(locale);
+
   const shows = upcomingShows();
   const nextShow = shows[0];
   const current = releases.find((r) => r.current) ?? releases[0];
@@ -37,7 +45,7 @@ export default function Home() {
               </p>
             )}
             <Link
-              href="/discographie"
+              href="/discography"
               className="inline-block text-sm font-medium text-signal underline-offset-4 hover:underline"
             >
               Toute la discographie →
@@ -91,7 +99,7 @@ export default function Home() {
               ))}
             </ul>
             <Link
-              href="/actu"
+              href="/news"
               className="mt-8 inline-block text-sm font-medium text-signal underline-offset-4 hover:underline"
             >
               Agenda complet →
@@ -113,7 +121,7 @@ export default function Home() {
           ))}
         </div>
         <Link
-          href="/discographie"
+          href="/discography"
           className="mt-10 inline-block text-sm font-medium text-signal underline-offset-4 hover:underline"
         >
           Voir toute la discographie →
@@ -145,7 +153,7 @@ export default function Home() {
               ))}
             </ul>
             <Link
-              href="/actu"
+              href="/news"
               className="mt-8 inline-block text-sm font-medium text-signal underline-offset-4 hover:underline"
             >
               Toute l&apos;actu →

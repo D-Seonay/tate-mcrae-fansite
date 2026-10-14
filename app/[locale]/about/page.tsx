@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
-import Reveal from "../components/Reveal";
-import SectionHeading from "../components/SectionHeading";
+import { setRequestLocale } from "next-intl/server";
+import Reveal from "@/app/components/Reveal";
+import SectionHeading from "@/app/components/SectionHeading";
 import { site } from "@/data/site";
 
 export const metadata: Metadata = {
@@ -8,7 +9,14 @@ export const metadata: Metadata = {
   description: "Ce qu'est ce site, et ce qu'il n'est pas.",
 };
 
-export default function AProposPage() {
+export default async function AboutPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  setRequestLocale(locale);
+
   return (
     <div className="mx-auto max-w-content px-5 py-20 md:px-8 md:py-28">
       <Reveal>

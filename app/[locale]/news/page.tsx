@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
-import Reveal from "../components/Reveal";
-import SectionHeading from "../components/SectionHeading";
+import { setRequestLocale } from "next-intl/server";
+import Reveal from "@/app/components/Reveal";
+import SectionHeading from "@/app/components/SectionHeading";
 import { news } from "@/data/news";
 import { upcomingShows } from "@/data/shows";
 import { formatDateFr } from "@/data/format";
@@ -10,7 +11,14 @@ export const metadata: Metadata = {
   description: "Les dernières actualités et les prochaines dates de concert.",
 };
 
-export default function ActuPage() {
+export default async function NewsPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  setRequestLocale(locale);
+
   const sortedNews = [...news].sort((a, b) => b.date.localeCompare(a.date));
   const shows = upcomingShows();
 

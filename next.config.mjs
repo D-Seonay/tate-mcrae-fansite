@@ -1,3 +1,5 @@
+import createNextIntlPlugin from "next-intl/plugin";
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
@@ -7,4 +9,7 @@ const nextConfig = {
   },
 };
 
-export default nextConfig;
+// Branche next-intl (lecture de i18n/request.ts).
+const withNextIntl = createNextIntlPlugin("./i18n/request.ts");
+
+export default withNextIntl(nextConfig);

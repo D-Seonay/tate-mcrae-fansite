@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import { site } from "@/data/site";
 
 const socials: { label: string; href: string }[] = [
@@ -69,7 +69,7 @@ export default function Footer() {
           </p>
           <p className="mt-3">
             © {new Date().getFullYear()} — projet de fan.{" "}
-            <Link href="/a-propos" className="underline hover:text-ink">
+            <Link href="/about" className="underline hover:text-ink">
               En savoir plus
             </Link>
             .

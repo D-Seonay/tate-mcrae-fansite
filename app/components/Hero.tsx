@@ -1,8 +1,8 @@
 "use client";
 
-import Link from "next/link";
 import { useRef } from "react";
 import { motion, useReducedMotion, useScroll, useTransform } from "motion/react";
+import { Link } from "@/i18n/navigation";
 import { site } from "@/data/site";
 import { formatDateFr } from "@/data/format";
 import type { Show } from "@/data/shows";
@@ -104,13 +104,13 @@ export default function Hero({ nextShow }: { nextShow?: Show }) {
           className="mt-10 flex flex-wrap items-center gap-4"
         >
           <Link
-            href="/discographie"
+            href="/discography"
             className="rounded-full bg-signal px-6 py-3 text-sm font-medium text-cream transition-transform duration-200 hover:bg-signal-dark active:scale-95"
           >
             Écouter la discographie
           </Link>
           <Link
-            href="/actu"
+            href="/news"
             className="rounded-full border border-ink/25 px-6 py-3 text-sm font-medium text-ink transition-colors duration-200 hover:border-ink hover:bg-ink/5"
           >
             Voir l&apos;actu

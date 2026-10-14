@@ -1,9 +1,13 @@
 import type { Metadata } from "next";
+import { notFound } from "next/navigation";
 import { Fraunces, Space_Grotesk } from "next/font/google";
-import "./globals.css";
-import Nav from "./components/Nav";
-import Footer from "./components/Footer";
-import Grain from "./components/Grain";
+import { NextIntlClientProvider, hasLocale } from "next-intl";
+import { setRequestLocale } from "next-intl/server";
+import "../globals.css";
+import Nav from "../components/Nav";
+import Footer from "../components/Footer";
+import Grain from "../components/Grain";
+import { routing } from "@/i18n/routing";
 import { site } from "@/data/site";
 
 /* Fraunces : serif éditoriale « mode / Riviera », chaleureuse et optique.
@@ -36,18 +40,35 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export function generateStaticParams() {
+  return routing.locales.map((locale) => ({ locale }));
+}
+
+export default async function LocaleLayout({
   children,
+  params,
 }: {
   children: React.ReactNode;
+  params: Promise<{ locale: string }>;
 }) {
+  const { locale } = await params;
+  if (!hasLocale(routing.locales, locale)) {
+    notFound();
+  }
+  setRequestLocale(locale);
+
   return (
-    <html lang="fr" className={`${fraunces.variable} ${spaceGrotesk.variable}`}>
+    <html
+      lang={locale}
+      className={`${fraunces.variable} ${spaceGrotesk.variable}`}
+    >
       <body className="min-h-screen bg-cream text-ink antialiased">
-        <Grain />
-        <Nav />
-        <main>{children}</main>
-        <Footer />
+        <NextIntlClientProvider>
+          <Grain />
+          <Nav />
+          <main>{children}</main>
+          <Footer />
+        </NextIntlClientProvider>
       </body>
     </html>
   );
