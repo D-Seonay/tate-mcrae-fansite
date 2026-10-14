@@ -1,9 +1,27 @@
 import type { Metadata } from "next";
+import { Fraunces, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import Nav from "./components/Nav";
 import Footer from "./components/Footer";
 import Grain from "./components/Grain";
 import { site } from "@/data/site";
+
+/* Fraunces : serif éditoriale « mode / Riviera », chaleureuse et optique.
+   Space Grotesk : grotesque moderne au contraste net pour l'UI et le texte. */
+const fraunces = Fraunces({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  style: ["normal", "italic"],
+  variable: "--font-fraunces",
+  display: "swap",
+});
+
+const spaceGrotesk = Space_Grotesk({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-space-grotesk",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: {
@@ -24,22 +42,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="fr">
-      <head>
-        {/* Polices chargées via Google Fonts (serif éditoriale + sans propre).
-            Les noms correspondent aux variables --font-display / --font-sans
-            définies dans globals.css. */}
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link
-          rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossOrigin="anonymous"
-        />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap"
-          rel="stylesheet"
-        />
-      </head>
+    <html lang="fr" className={`${fraunces.variable} ${spaceGrotesk.variable}`}>
       <body className="min-h-screen bg-cream text-ink antialiased">
         <Grain />
         <Nav />

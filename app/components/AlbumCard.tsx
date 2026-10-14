@@ -1,11 +1,18 @@
+"use client";
+
+import { motion, useReducedMotion } from "motion/react";
 import SpotifyEmbed from "./SpotifyEmbed";
 import type { Release } from "@/data/discography";
 
 export default function AlbumCard({ release }: { release: Release }) {
+  const reduce = useReducedMotion();
+
   return (
-    <article
-      className="group overflow-hidden rounded-xl border border-stone/60 bg-sand/40"
+    <motion.article
       id={release.slug}
+      whileHover={reduce ? undefined : { y: -6 }}
+      transition={{ type: "spring", stiffness: 300, damping: 22 }}
+      className="group overflow-hidden rounded-2xl border border-stone/60 bg-sand/40 shadow-sm transition-shadow duration-300 hover:shadow-xl hover:shadow-ink/10"
     >
       {/* Visuel : ton image si fournie, sinon un dégradé chaud en placeholder. */}
       <div className="relative aspect-square w-full overflow-hidden">
@@ -14,20 +21,20 @@ export default function AlbumCard({ release }: { release: Release }) {
           <img
             src={release.cover}
             alt={`Visuel — ${release.title}`}
-            className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+            className="h-full w-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-105"
           />
         ) : (
           <div
-            className="flex h-full w-full items-end bg-gradient-to-br from-sand via-stone to-olive/60 p-4"
+            className="flex h-full w-full items-end bg-gradient-to-br from-sand via-stone to-olive/60 p-4 transition-transform duration-[1200ms] ease-out group-hover:scale-105"
             aria-hidden="true"
           >
-            <span className="font-display text-2xl text-ink/70">
+            <span className="font-display text-2xl italic text-ink/70">
               {release.title}
             </span>
           </div>
         )}
         {release.current && (
-          <span className="absolute left-3 top-3 rounded-full bg-signal px-3 py-1 text-xs font-medium uppercase tracking-wider text-cream">
+          <span className="absolute left-3 top-3 rounded-full bg-signal px-3 py-1 text-xs font-medium uppercase tracking-wider text-cream shadow-sm">
             Nouvelle ère
           </span>
         )}
@@ -45,6 +52,6 @@ export default function AlbumCard({ release }: { release: Release }) {
         )}
         <SpotifyEmbed albumId={release.spotifyId} title={release.title} />
       </div>
-    </article>
+    </motion.article>
   );
 }

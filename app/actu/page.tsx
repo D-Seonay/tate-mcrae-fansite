@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Reveal from "../components/Reveal";
 import SectionHeading from "../components/SectionHeading";
 import { news } from "@/data/news";
 import { upcomingShows } from "@/data/shows";
@@ -14,23 +15,30 @@ export default function ActuPage() {
   const shows = upcomingShows();
 
   return (
-    <div className="mx-auto max-w-content px-5 py-16 md:px-8">
-      <SectionHeading overline="Actu & agenda" title="Quoi de neuf" />
+    <div className="mx-auto max-w-content px-5 py-20 md:px-8 md:py-28">
+      <Reveal>
+        <SectionHeading overline="Actu & agenda" title="Quoi de neuf" />
+      </Reveal>
 
-      <div className="mt-12 grid gap-12 lg:grid-cols-[1.4fr_1fr]">
+      <div className="mt-14 grid gap-12 lg:grid-cols-[1.4fr_1fr]">
         {/* Fil d'actualité */}
         <section>
           <h3 className="mb-6 font-display text-2xl text-ink">Actualité</h3>
           {sortedNews.length === 0 ? (
-            <p className="text-sm text-muted">Rien à signaler pour l&apos;instant.</p>
+            <p className="text-sm text-muted">
+              Rien à signaler pour l&apos;instant.
+            </p>
           ) : (
             <ul className="space-y-8">
-              {sortedNews.map((n) => (
-                <li
+              {sortedNews.map((n, i) => (
+                <Reveal
+                  as="li"
                   key={n.date + n.title}
+                  delay={i * 0.06}
+                  y={18}
                   className="border-l-2 border-signal pl-5"
                 >
-                  <p className="text-xs uppercase tracking-wider text-muted">
+                  <p className="overline text-muted">
                     {formatDateFr(n.date)}
                     {n.tag ? ` · ${n.tag}` : ""}
                   </p>
@@ -50,7 +58,7 @@ export default function ActuPage() {
                       En savoir plus →
                     </a>
                   )}
-                </li>
+                </Reveal>
               ))}
             </ul>
           )}
@@ -58,15 +66,22 @@ export default function ActuPage() {
 
         {/* Agenda */}
         <section>
-          <h3 className="mb-6 font-display text-2xl text-ink">Prochaines dates</h3>
+          <h3 className="mb-6 font-display text-2xl text-ink">
+            Prochaines dates
+          </h3>
           {shows.length === 0 ? (
-            <p className="text-sm text-muted">Aucune date annoncée pour le moment.</p>
+            <p className="text-sm text-muted">
+              Aucune date annoncée pour le moment.
+            </p>
           ) : (
             <ul className="space-y-4">
-              {shows.map((s) => (
-                <li
+              {shows.map((s, i) => (
+                <Reveal
+                  as="li"
                   key={`${s.date}-${s.city}`}
-                  className="rounded-lg border border-stone/60 bg-sand/40 p-4"
+                  delay={i * 0.06}
+                  y={16}
+                  className="rounded-2xl border border-stone/60 bg-sand/40 p-4 transition-colors hover:border-signal/50"
                 >
                   <p className="font-display text-lg text-ink">{s.city}</p>
                   <p className="text-sm text-muted">
@@ -83,7 +98,7 @@ export default function ActuPage() {
                       Billets →
                     </a>
                   )}
-                </li>
+                </Reveal>
               ))}
             </ul>
           )}
