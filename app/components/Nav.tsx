@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { useTranslations } from "next-intl";
 import { Link, usePathname } from "@/i18n/navigation";
+import LocaleSwitcher from "./LocaleSwitcher";
 import { site } from "@/data/site";
 
 const links = [
@@ -70,6 +71,9 @@ export default function Nav() {
               </li>
             );
           })}
+          <li>
+            <LocaleSwitcher />
+          </li>
         </ul>
 
         {/* Bouton menu mobile */}
@@ -126,9 +130,10 @@ export default function Nav() {
                 </motion.li>
               ))}
             </ul>
-            <p className="mt-auto px-6 pb-10 text-xs text-muted">
-              {tSite("tagline")}
-            </p>
+            <div className="mt-auto flex items-center justify-between px-6 pb-10">
+              <p className="text-xs text-muted">{tSite("tagline")}</p>
+              <LocaleSwitcher className="text-sm" />
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
