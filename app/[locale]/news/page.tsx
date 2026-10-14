@@ -6,11 +6,21 @@ import { news } from "@/data/news";
 import { upcomingShows } from "@/data/shows";
 import { formatDate, localize } from "@/data/format";
 import type { Locale } from "@/i18n/routing";
+import { languageAlternates } from "@/i18n/metadata";
 
-export const metadata: Metadata = {
-  title: "Actu & agenda",
-  description: "Les dernières actualités et les prochaines dates de concert.",
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "meta.news" });
+  return {
+    title: t("title"),
+    description: t("description"),
+    alternates: { languages: languageAlternates("/news") },
+  };
+}
 
 export default async function NewsPage({
   params,

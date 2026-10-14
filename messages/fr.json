@@ -80,6 +80,20 @@
     "media": "Média",
     "announcement": "Annonce"
   },
+  "meta": {
+    "news": {
+      "title": "Actu & agenda",
+      "description": "Les dernières actualités et les prochaines dates de concert."
+    },
+    "discography": {
+      "title": "Discographie",
+      "description": "Albums, EP et singles — avec lecteurs officiels intégrés."
+    },
+    "about": {
+      "title": "À propos",
+      "description": "Ce qu'est ce site, et ce qu'il n'est pas."
+    }
+  },
   "spotify": {
     "label": "Lecteur Spotify",
     "placeholder": "Colle l'ID Spotify {title} dans le fichier de données pour afficher le lecteur ici.",

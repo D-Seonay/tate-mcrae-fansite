@@ -2,12 +2,13 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Fraunces, Space_Grotesk } from "next/font/google";
 import { NextIntlClientProvider, hasLocale } from "next-intl";
-import { setRequestLocale } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import "../globals.css";
 import Nav from "../components/Nav";
 import Footer from "../components/Footer";
 import Grain from "../components/Grain";
 import { routing } from "@/i18n/routing";
+import { languageAlternates } from "@/i18n/metadata";
 import { site } from "@/data/site";
 
 /* Fraunces : serif éditoriale « mode / Riviera », chaleureuse et optique.
@@ -27,18 +28,33 @@ const spaceGrotesk = Space_Grotesk({
   display: "swap",
 });
 
-export const metadata: Metadata = {
-  title: {
-    default: `${site.artist} — ${site.tagline}`,
-    template: `%s — ${site.artist}`,
-  },
-  description: site.description,
-  openGraph: {
-    title: `${site.artist} — ${site.tagline}`,
-    description: site.description,
-    type: "website",
-  },
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "site" });
+  const tagline = t("tagline");
+  const description = t("description");
+
+  return {
+    title: {
+      default: `${site.artist} — ${tagline}`,
+      template: `%s — ${site.artist}`,
+    },
+    description,
+    alternates: {
+      languages: languageAlternates("/"),
+    },
+    openGraph: {
+      title: `${site.artist} — ${tagline}`,
+      description,
+      type: "website",
+      locale,
+    },
+  };
+}
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));

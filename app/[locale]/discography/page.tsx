@@ -4,11 +4,21 @@ import Reveal from "@/app/components/Reveal";
 import SectionHeading from "@/app/components/SectionHeading";
 import AlbumCard from "@/app/components/AlbumCard";
 import { releases } from "@/data/discography";
+import { languageAlternates } from "@/i18n/metadata";
 
-export const metadata: Metadata = {
-  title: "Discographie",
-  description: "Albums, EP et singles — avec lecteurs officiels intégrés.",
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "meta.discography" });
+  return {
+    title: t("title"),
+    description: t("description"),
+    alternates: { languages: languageAlternates("/discography") },
+  };
+}
 
 export default async function DiscographyPage({
   params,

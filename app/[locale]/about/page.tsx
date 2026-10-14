@@ -3,11 +3,21 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import Reveal from "@/app/components/Reveal";
 import SectionHeading from "@/app/components/SectionHeading";
 import { site } from "@/data/site";
+import { languageAlternates } from "@/i18n/metadata";
 
-export const metadata: Metadata = {
-  title: "À propos",
-  description: "Ce qu'est ce site, et ce qu'il n'est pas.",
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "meta.about" });
+  return {
+    title: t("title"),
+    description: t("description"),
+    alternates: { languages: languageAlternates("/about") },
+  };
+}
 
 export default async function AboutPage({
   params,

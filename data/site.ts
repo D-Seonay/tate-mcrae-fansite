@@ -4,9 +4,8 @@
  */
 export const site = {
   artist: "Tate McRae",
-  tagline: "Site de fan non officiel",
-  description:
-    "Hub de fan non officiel dédié à Tate McRae : actualité, dates de concert, discographie et clips, au même endroit.",
+  // Le slogan et la description sont traduits dans messages/{en,fr}.json
+  // (namespace `site`). Édite-les là plutôt qu'ici.
   // Liens officiels à faire pointer vers les vrais comptes (embeds / sorties).
   // NB : vérifie les IDs Spotify / Apple Music ci-dessous avant la mise en ligne.
   links: {

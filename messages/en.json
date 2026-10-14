@@ -80,6 +80,20 @@
     "media": "Media",
     "announcement": "Announcement"
   },
+  "meta": {
+    "news": {
+      "title": "News & agenda",
+      "description": "The latest news and upcoming tour dates."
+    },
+    "discography": {
+      "title": "Discography",
+      "description": "Albums, EPs and singles — with official players embedded."
+    },
+    "about": {
+      "title": "About",
+      "description": "What this site is, and what it isn't."
+    }
+  },
   "spotify": {
     "label": "Spotify player",
     "placeholder": "Paste the Spotify ID {title} into the data file to show the player here.",
